@@ -4,8 +4,6 @@ import info.yannxia.java.merope.handler.routing.EchoRoutingHandler;
 import info.yannxia.java.merope.handler.routing.LoginRoutingHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.shareddata.LocalMap;
-import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.asyncsql.MySQLClient;
 import io.vertx.ext.web.Router;
 
@@ -29,7 +27,11 @@ public class MeropeApplicationVerticle extends AbstractVerticle {
      * 1. init mysql
      */
     private void initData() {
-        JsonObject mySQLClientConfig = new JsonObject().put("host", "mymysqldb.mycompany");
+        JsonObject mySQLClientConfig = new JsonObject()
+                .put("host", "localhost")
+                .put("username", "root")
+                .put("password", "root")
+                .put("database", "temp");
         MySQLClient.createShared(vertx, mySQLClientConfig);
     }
 

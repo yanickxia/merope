@@ -1,7 +1,22 @@
 group 'info.yannxia.java'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+        classpath "gradle.plugin.com.boxfuse.client:flyway-release:4.1.2"
+    }
+}
+
 apply plugin: 'java'
+apply plugin: "org.flywaydb.flyway"
 
 sourceCompatibility = 1.8
 
@@ -14,7 +29,6 @@ ext {
     lombokVersion = '1.16.14'
 }
 
-
 dependencies {
     compile group: 'io.vertx', name: 'vertx-core', version: vertxVersion
     compile group: 'io.vertx', name: 'vertx-web', version: vertxVersion
@@ -23,8 +37,8 @@ dependencies {
 
 
     compile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.24'
 
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
